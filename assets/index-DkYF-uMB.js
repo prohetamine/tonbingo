@@ -99,7 +99,7 @@ Please change the parent <Route path="${N}"> to <Route path="${N==="/"?"*":`${N}
   width: 400px;
   padding: 20px;
   font-size: 20px;
-`,Ib=()=>{const[n,i]=j.useState("");return je.jsx(Wb,{children:je.jsx(Jy,{action:`/address/${n}`,children:je.jsx(Pb,{value:n,onChange:({target:{value:c}})=>i(c)})})})},eS="/tonpic/assets/question-yaQXi801.png",tS=Yt.canvas`
+`,Ib=()=>{const[n,i]=j.useState("");return je.jsx(Wb,{children:je.jsx(Jy,{action:`/address/${n}`,children:je.jsx(Pb,{value:n,placeholder:"Address",onChange:({target:{value:c}})=>i(c)})})})},eS="/tonpic/assets/question-yaQXi801.png",tS=Yt.canvas`
   background-image: url(${eS});
   background-size: cover;
 `,bv=({srcData:n,size:i})=>{const c=j.useRef();return j.useEffect(()=>{const f=c.current;if(f){const o=f.getContext("2d");Array(n.max.x).fill(!0).map((d,v)=>Array(n.max.y).fill(!0).map((g,y)=>{var x;const m=(x=n.chunks[`${v}:${y}x${n.max.x}:${n.max.y}`])==null?void 0:x.data,p=new window.Image;p.onload=()=>{const R=f.width/n.max.x;o.drawImage(p,v*R,y*R,R,R)},p.src=m}))}},[c,n]),je.jsx(tS,{width:i,height:i,ref:c})},aS=Yt.div`
