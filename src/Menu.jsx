@@ -59,14 +59,17 @@ const Menu = () => {
           ?.filter(action => action.type === 'ton_transfer')
           ?.map(action => action?.details?.comment?.split('@'))
           ?.filter(data => data)
-          ?.map(([app, id, title, type, nsfw, position, data, isOk]) => {
-            console.log(data.slice(-100), isOk)
+          ?.map(([app, id, title, description, type, nsfw, chunkAmount, position, data, isOk]) => {
             try {
               if (
-               // isOk === 'ok' &&
+                chunkAmount - 0 === parseFloat(parseFloat(chunkAmount).toFixed(2)) &&
+                isOk === 'ok' &&
                 app === 'tonpic' && 
                 parseInt(id) === 1 * id && 
                 title.length > 0 && 
+                title.length < 51 && 
+                description.length > 0 && 
+                description.length < 200 && 
                 (type === 'i') && 
                 (nsfw === 'y' || nsfw === 'n') && 
                 position.match(/\d+:\d+x\d+:\d+/) && 
@@ -93,6 +96,8 @@ const Menu = () => {
                     title,
                     type, 
                     nsfw,
+                    chunkAmount,
+                    description,
                     max: { 
                       x: mx,
                       y: my

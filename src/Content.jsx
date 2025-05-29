@@ -24,6 +24,10 @@ const PathOverflow = styled.div`
   padding-bottom: 0px;
 `
 
+const ChunkWarning = styled.span`
+  color: red;
+`
+
 const Content = () => {
   const { address, type: _type, id: _id } = useParams()
   
@@ -61,13 +65,18 @@ const Content = () => {
         data.actions
           ?.map(action => action?.details?.comment?.split('@'))
           ?.filter(data => data)
-          ?.map(([app, id, title, type, nsfw, position, data]) => {
+          ?.map(([app, id, title, description, type, nsfw, chunkAmount, position, data, isOk]) => {
             try {
               if (
+                chunkAmount - 0 === parseFloat(parseFloat(chunkAmount).toFixed(2)) &&
+                isOk === 'ok' &&
                 app === 'tonpic' && 
                 parseInt(id) === 1 * id && 
                 id === _id &&
                 title.length > 0 && 
+                title.length < 51 && 
+                description.length > 0 && 
+                description.length < 200 && 
                 (type === _type) && 
                 (nsfw === 'y' || nsfw === 'n') && 
                 position.match(/\d+:\d+x\d+:\d+/) && 
@@ -94,6 +103,8 @@ const Content = () => {
                     type, 
                     nsfw,
                     id,
+                    chunkAmount,
+                    description,
                     max: { 
                       x: mx,
                       y: my
@@ -131,6 +142,9 @@ const Content = () => {
       <PathOverflow>
         <Link to={`/address/${address}`}>{address}</Link> <span>/</span> <Link to={`/address/${address}/${_type}/${_id}`}>{_id}</Link> ({Object.keys(image?.chunks || {}).length}/{(image?.max?.y * image?.max?.x) || 0})
       </PathOverflow>
+      <PathOverflow>
+        <ChunkWarning>Полните кошелек <u><b>{address}</b></u> на <b>{image?.chunkAmount} TON</b> чтобы открыть очередной кусок в комментарии укажите "{_id}" (Без кавычек)</ChunkWarning>
+      </PathOverflow>
       <Items>
         {
           image 
@@ -138,6 +152,7 @@ const Content = () => {
               <div>
                 <CanvasImage srcData={image} size={`${window.innerWidth / 2}px`} />
                 <div>{image.title}</div>
+                <div>{image.description}</div>
               </div>
             )
             : (

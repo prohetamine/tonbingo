@@ -35,8 +35,9 @@ const Template = () => {
   return (
     <Body>
       <Navigation>
-        <Logo />
+        <Logo>Beta App</Logo>
         <Link to='/'>Search</Link>
+        <Link to='https://github.com'>GitHub</Link>
       </Navigation>
       <Outlet />
       <Footer>
