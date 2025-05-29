@@ -40,7 +40,7 @@ const Content = () => {
     const intervalId = setInterval(async () => {
       const { accounts } = await fetch(`https://toncenter.com/api/v3/accountStates?address=${address}&include_boc=false`).then(data => data.json())
       setLastTransactionLt(accounts[0].last_transaction_lt)
-    }, 5000)
+    }, 60000 * 1)
 
     return () => {
       clearInterval(intervalId)
@@ -49,15 +49,11 @@ const Content = () => {
   }, [address])
 
   useEffect(() => {
-    if (!lastTransactionLt) {
-      return
-    }
-
     const IntervalId = setInterval(async () => {
       setFirstLoadAction(true)
       
       try {
-        const data = await fetch(`https://toncenter.com/api/v3/actions?account=${address}&limit=${1000}&end_lt=${lastTransactionLt}&sort=desc&supported_action_types[]=multisig_create_order&supported_action_types[]=multisig_approve&supported_action_types[]=multisig_execute&supported_action_types[]=jvault_stake&supported_action_types[]=jvault_claim&supported_action_types[]=vesting_send_message&supported_action_types[]=vesting_add_whitelist&supported_action_types[]=evaa_supply&supported_action_types[]=evaa_withdraw`).then(data => data.json())
+        const data = await fetch(`https://toncenter.com/api/v3/actions?account=${address}&limit=${1000}${lastTransactionLt ? `&end_lt=${lastTransactionLt}` : ``}&sort=desc&supported_action_types[]=multisig_create_order&supported_action_types[]=multisig_approve&supported_action_types[]=multisig_execute&supported_action_types[]=jvault_stake&supported_action_types[]=jvault_claim&supported_action_types[]=vesting_send_message&supported_action_types[]=vesting_add_whitelist&supported_action_types[]=evaa_supply&supported_action_types[]=evaa_withdraw`).then(data => data.json())
         if (data?.actions?.length) {
           setLastTransactionLt(data.actions[data?.actions?.length - 1]?.end_lt)
         }

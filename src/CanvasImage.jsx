@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useRef } from 'react'
 import styled from 'styled-components'
 import question from './assets/question.png'
@@ -27,8 +28,12 @@ const CanvasImage = ({ srcData, size }) => {
           img.src = data
         })
       )
+
+      return () => {
+        ctx.clearRect(0, 0, node.width, node.height)
+      }
     }
-  }, [canvasNode, srcData])
+  }, [canvasNode, srcData, Object.keys(srcData.chunks).length])
 
   return (
     <Canvas width={size} height={size} ref={canvasNode}></Canvas>

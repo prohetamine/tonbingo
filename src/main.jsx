@@ -31,7 +31,9 @@ const router = createBrowserRouter([
       }
     ]
   }
-])
+], {
+    basename: '/tonpic'
+})
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>

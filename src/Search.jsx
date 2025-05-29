@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import styled from 'styled-components'
-import { Link } from 'react-router-dom'
+import { Form } from 'react-router-dom'
 
 const Body = styled.div`
   width: 100%;
@@ -21,9 +21,9 @@ const Search = () => {
 
   return (
     <Body>
-      <form action={`/address/${address}`}>
-        <Input value={address} onChange={({ target: { value } }) => setAddress(value)} />
-      </form>
+      <Form action={`/address/${address}`}>
+        <Input value={address} placeholder='Address' onChange={({ target: { value } }) => setAddress(value)} />
+      </Form>
     </Body>
   )
 }
