@@ -30,13 +30,17 @@ const Menu = () => {
 
   useEffect(() => {
     const timeId = setTimeout(async () => {
-      const { accounts } = await fetch(`https://toncenter.com/api/v3/accountStates?address=${address}&include_boc=false`).then(data => data.json())
-      setLastTransactionLt(accounts[0].last_transaction_lt)
+      try {
+        const { accounts } = await fetch(`https://toncenter.com/api/v3/accountStates?address=${address}&include_boc=false`).then(data => data.json())
+        setLastTransactionLt(accounts[0]?.last_transaction_lt)
+      } catch (e) {}
     }, 100)
 
     const intervalId = setInterval(async () => {
-      const { accounts } = await fetch(`https://toncenter.com/api/v3/accountStates?address=${address}&include_boc=false`).then(data => data.json())
-      setLastTransactionLt(accounts[0].last_transaction_lt)
+      try {
+        const { accounts } = await fetch(`https://toncenter.com/api/v3/accountStates?address=${address}&include_boc=false`).then(data => data.json())
+        setLastTransactionLt(accounts[0]?.last_transaction_lt)
+      } catch (e) {}
     }, 60000 * 5)
 
     return () => {
