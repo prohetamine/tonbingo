@@ -42,7 +42,7 @@ const useScan = address => {
         data.actions
           ?.map(action => action?.details?.comment?.split('@'))
           ?.filter(data => data)
-          ?.map(([app, id, title, description, type, nsfw, chunkAmount, position, data, isOk]) => {
+          ?.map(async ([app, id, title, description, type, nsfw, chunkAmount, position, data, isOk]) => {
             try {
               if (
                 chunkAmount - 0 === parseFloat(parseFloat(chunkAmount).toFixed(2)) &&
@@ -88,11 +88,18 @@ const useScan = address => {
                     chunks: {}
                   }
                 } 
+
+                const img = await new Promise(res => {
+                  const img = new window.Image()
+                  img.onload = () => res(img)
+                  img.src = data
+                })
                 
                 window.data[address][id].chunks[position] = {
                   x, 
                   y,
-                  data
+                  data,
+                  img
                 }
 
                 const _images = Object.keys(window.data[address]).map(id => window.data[address][id])
@@ -110,7 +117,7 @@ const useScan = address => {
     return () => clearInterval(IntervalId)
   }, [lastTransactionLt, isFirstLoadAction, address, images])
 
-  return images || []
+  return (images || [])
 }
 
 export default useScan
