@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 set -e
 npm run build
-cp index.html dist/404.html
+cp dist/index.html dist/404.html
 cd dist
 git init
 git add -A
