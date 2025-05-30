@@ -97,7 +97,7 @@ const useScan = address => {
 
                 const _images = Object.keys(window.data[address]).map(id => window.data[address][id])
 
-                if (images.length !== _images.length) {
+                if (JSON.stringify(images) !== JSON.stringify(_images.length)) {
                   localStorage.setItem('images', JSON.stringify(_images))
                   setImages(_images)
                 }
