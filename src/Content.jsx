@@ -145,9 +145,6 @@ const Content = () => {
       
       try {
         const data = await fetch(`https://toncenter.com/api/v3/actions?account=${address}&limit=${1000}&sort=desc&supported_action_types[]=multisig_create_order&supported_action_types[]=multisig_approve&supported_action_types[]=multisig_execute&supported_action_types[]=jvault_stake&supported_action_types[]=jvault_claim&supported_action_types[]=vesting_send_message&supported_action_types[]=vesting_add_whitelist&supported_action_types[]=evaa_supply&supported_action_types[]=evaa_withdraw`).then(data => data.json())
-        if (data?.actions?.length) {
-          setLastTransactionLt(data.actions[data?.actions?.length - 1]?.end_lt)
-        }
         
         data.actions
           ?.map(action => action?.details?.comment?.split('@'))
@@ -220,7 +217,7 @@ const Content = () => {
     }, isFirstLoadAction ? 10000 : 1000)
 
     return () => clearInterval(IntervalId)
-  }, [lastTransactionLt, isFirstLoadAction, address, images, _type, _id])
+  }, [isFirstLoadAction, address, images, _type, _id])
 
   const image = images.filter(image => `${image.id}` === _id)[0]
 
