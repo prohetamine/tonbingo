@@ -32,7 +32,7 @@ const Content = () => {
   const { address, type: _type, id: _id } = useParams()
       , images = useScan(address)
 
-  const image = images.filter(image => `${image.id}` === _id)[0]
+  const image = images?.filter(image => `${image.id}` === _id)[0]
 
   return (
     <Body>

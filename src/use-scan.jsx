@@ -12,7 +12,7 @@ try {
 const useScan = address => {
   const [lastTransactionLt, setLastTransactionLt] = useState(null)
       , [isFirstLoadAction, setFirstLoadAction] = useState(false)
-      , [images, setImages] = useState(defaultImages)
+      , [images, setImages] = useState(defaultImages || [])
 
   useEffect(() => {
     const timeId = setTimeout(async () => {
@@ -110,7 +110,7 @@ const useScan = address => {
     return () => clearInterval(IntervalId)
   }, [lastTransactionLt, isFirstLoadAction, address, images])
 
-  return images
+  return images || []
 }
 
 export default useScan

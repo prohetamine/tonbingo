@@ -34,7 +34,7 @@ const Menu = () => {
       </PathOverflow>
       <Items>
         {
-          images.map((image, key) => {
+          images?.map((image, key) => {
             return (              
               <Link key={key} to={`/address/${address}/${image.type}/${image.id}`}>
                 <CanvasImage srcData={image} size={'100px'} />
