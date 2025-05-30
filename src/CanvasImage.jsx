@@ -20,20 +20,32 @@ const CanvasImage = ({ srcData, size }) => {
       Array(srcData.max.x).fill(true).map((_, x) => 
         Array(srcData.max.y).fill(true).map((_, y) => {
           const data = srcData.chunks[`${x}:${y}x${srcData.max.x}:${srcData.max.y}`]?.data
-          const img = new window.Image()
-          img.onload = () => {
-            const offset = node.width / srcData.max.x
-            ctx.drawImage(img, x * offset, y * offset, offset, offset)
+          const id = `${srcData.id}.${x}:${y}x${srcData.max.x}:${srcData.max.y}`
+          
+          if (!window.img) {
+             window.img = {}
           }
-          img.src = data
+         
+          window.img[id] = new window.Image()
+          if (window.img[id]) {
+            const offset = node.width / srcData.max.x
+            ctx.drawImage(window.img[id], x * offset, y * offset, offset, offset)
+          } else {
+            window.img[id].onload = () => {
+              const offset = node.width / srcData.max.x
+              ctx.drawImage(window.img[id], x * offset, y * offset, offset, offset)
+            }
+            window.img[id].src = data 
+          }
         })
       )
 
       return () => {
-        ctx.clearRect(0, 0, node.width, node.height)
+        ctx.fillStyle = '#444'
+        ctx.fillRect(0, 0, 0, 0)
       }
     }
-  }, [canvasNode, srcData, Object.keys(srcData.chunks).length])
+  }, [canvasNode.current, srcData, Object.keys(srcData.chunks).length])
 
   return (
     <Canvas width={size} height={size} ref={canvasNode}></Canvas>
