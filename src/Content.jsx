@@ -52,7 +52,7 @@ const Content = () => {
           image 
             ? (
               <div>
-                <CanvasImage srcData={image} size={`${window.innerWidth / 2}px`} />
+                <CanvasImage srcData={image} size={`${(window.innerHeight > window.innerWidth ? window.innerWidth : window.innerHeight) - 240}px`} />
                 <div>{image.title}</div>
                 <div>{image.description}</div>
               </div>
