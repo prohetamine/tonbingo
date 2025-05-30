@@ -123,6 +123,8 @@ const Content = () => {
                   data
                 }
 
+                localStorage.setItem('data', JSON.stringify(window.data))
+
                 const _images = Object.keys(window.data[address]).map(id => window.data[address][id])
 
                 if (images.length !== _images.length) {
