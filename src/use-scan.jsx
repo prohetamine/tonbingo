@@ -2,17 +2,10 @@
 /* eslint-disable no-unused-vars */
 import { useEffect, useState } from 'react'
 
-let defaultImages = []
-
-try {
-  defaultImages = JSON.parse(localStorage.getItem('images'))
-} catch (e) {}
-
-
 const useScan = address => {
   const [lastTransactionLt, setLastTransactionLt] = useState(null)
       , [isFirstLoadAction, setFirstLoadAction] = useState(false)
-      , [images, setImages] = useState(defaultImages || [])
+      , [images, setImages] = useState([])
 
   useEffect(() => {
     const timeId = setTimeout(async () => {
@@ -105,7 +98,6 @@ const useScan = address => {
                 const _images = Object.keys(window.data[address]).map(id => window.data[address][id])
 
                 if (JSON.stringify(images) !== JSON.stringify(_images.length)) {
-                  localStorage.setItem('images', JSON.stringify(_images))
                   setImages(_images)
                 }
               }
@@ -117,7 +109,7 @@ const useScan = address => {
     return () => clearInterval(IntervalId)
   }, [lastTransactionLt, isFirstLoadAction, address, images])
 
-  return (images || [])
+  return images
 }
 
 export default useScan
