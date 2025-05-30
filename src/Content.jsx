@@ -75,7 +75,7 @@ const Content = () => {
                 chunkAmount - 0 === parseFloat(parseFloat(chunkAmount).toFixed(2)) &&
                 isOk === 'ok' &&
                 app === 'tonpic' && 
-                parseInt(id) === 1 * id && 
+                id.length === 4 &&
                 id === _id &&
                 title.length > 0 && 
                 title.length < 51 && 

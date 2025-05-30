@@ -60,16 +60,17 @@ const Menu = () => {
         }
       
         data.actions
-          ?.filter(action => action.type === 'ton_transfer')
+          //?.filter(action => action.type === 'ton_transfer')
           ?.map(action => action?.details?.comment?.split('@'))
           ?.filter(data => data)
           ?.map(([app, id, title, description, type, nsfw, chunkAmount, position, data, isOk]) => {
+            console.log(app, id, title, description, type, nsfw, chunkAmount, position, data, isOk)
             try {
               if (
                 chunkAmount - 0 === parseFloat(parseFloat(chunkAmount).toFixed(2)) &&
                 isOk === 'ok' &&
-                app === 'tonpic' && 
-                parseInt(id) === 1 * id && 
+                app === 'tonbingo' && 
+                id.length === 4 && 
                 title.length > 0 && 
                 title.length < 51 && 
                 description.length > 0 && 
@@ -139,7 +140,7 @@ const Menu = () => {
       </PathOverflow>
       <Items>
         {
-          images.sort((a, b) => a.id - b.id).map((image, key) => {
+          images.map((image, key) => {
             return (              
               <Link key={key} to={`/address/${address}/${image.type}/${image.id}`}>
                 <CanvasImage srcData={image} size={'100px'} />
