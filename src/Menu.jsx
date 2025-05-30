@@ -69,7 +69,7 @@ const Menu = () => {
               if (
                 chunkAmount - 0 === parseFloat(parseFloat(chunkAmount).toFixed(2)) &&
                 isOk === 'ok' &&
-                app === 'tonbingo' && 
+                app === 'tonbingo1' && 
                 id.length === 4 && 
                 title.length > 0 && 
                 title.length < 51 && 
