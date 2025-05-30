@@ -130,9 +130,7 @@ const Menu = () => {
       } catch (e) {}
     }, isFirstLoadAction ? 5000 : 100)
 
-    return () => {
-      clearInterval(IntervalId)
-    }
+    return () => clearInterval(IntervalId)
   }, [lastTransactionLt, isFirstLoadAction, address, images])
 
   return (

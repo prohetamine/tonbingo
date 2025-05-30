@@ -136,9 +136,7 @@ const Content = () => {
       } catch (e) {}
     }, isFirstLoadAction ? 5000 : 100)
 
-    return () => {
-      clearInterval(IntervalId)
-    }
+    return () => clearInterval(IntervalId)
   }, [lastTransactionLt, isFirstLoadAction, address, images, _type, _id])
 
   useEffect(() => {
@@ -208,6 +206,8 @@ const Content = () => {
                   data
                 }
 
+                localStorage.setItem('data', JSON.stringify(window.data))
+
                 const _images = Object.keys(window.data[address]).map(id => window.data[address][id])
 
                 if (images.length !== _images.length) {
@@ -219,9 +219,7 @@ const Content = () => {
       } catch (e) {}
     }, isFirstLoadAction ? 10000 : 1000)
 
-    return () => {
-      clearInterval(IntervalId)
-    }
+    return () => clearInterval(IntervalId)
   }, [lastTransactionLt, isFirstLoadAction, address, images, _type, _id])
 
   const image = images.filter(image => `${image.id}` === _id)[0]
