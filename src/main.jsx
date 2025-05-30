@@ -13,10 +13,6 @@ import Search from './Search.jsx'
 import Menu from './Menu.jsx'
 import Content from './Content.jsx'
 
-try {
-  window.data = JSON.parse(localStorage.getItem('data'))
-} catch (e) {}
-
 const router = createBrowserRouter([
   {
     path: '/',
