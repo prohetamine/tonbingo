@@ -41,7 +41,7 @@ const Template = () => {
       </Navigation>
       <Outlet />
       <Footer>
-        TonPic 2025
+        TonBingo 2025
       </Footer>
     </Body>
   )

@@ -17,7 +17,7 @@ const router = createBrowserRouter([
   {
     path: '/',
     element: <Template />,
-    //errorElement: <div>Error</div>,
+    errorElement: <div>Error</div>,
     children: [
       {
         path: '/',
@@ -34,7 +34,7 @@ const router = createBrowserRouter([
     ]
   }
 ], {
-    basename: '/tonpic'
+    basename: '/tonbingo'
 })
 
 createRoot(document.getElementById("root")).render(

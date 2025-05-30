@@ -32,13 +32,7 @@ const Content = () => {
   const { address, type: _type, id: _id } = useParams()
       , images = useScan(address)
 
-  console.log(images)
-
   const image = images?.filter(image => `${image.id}` === _id)[0]
-
-  if (image) {
-    console.log(image.chunks)
-  }
 
   return (
     <Body>
