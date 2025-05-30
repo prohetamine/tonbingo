@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-empty */
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import {
