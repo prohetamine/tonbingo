@@ -146,9 +146,14 @@ const Content = () => {
       <PathOverflow>
         <Link to={`/address/${address}`}>{address}</Link> <span>/</span> <Link to={`/address/${address}/${_type}/${_id}`}>{_id}</Link> ({Object.keys(image?.chunks || {}).length}/{(image?.max?.y * image?.max?.x) || 0})
       </PathOverflow>
-      <PathOverflow>
-        <ChunkWarning>Полните кошелек <u><b>{address}</b></u> на <b>{image?.chunkAmount} TON</b> чтобы открыть очередной кусок в комментарии укажите "{_id}" (Без кавычек)</ChunkWarning>
-      </PathOverflow>
+      {
+        Object.keys(image?.chunks || {}).length === 0 && Object.keys(image?.chunks || {}).length === (image?.max?.y * image?.max?.x) 
+          ? (
+            <PathOverflow>
+              <ChunkWarning>Полните кошелек <u><b>{address}</b></u> на <b>{image?.chunkAmount} TON</b> чтобы открыть очередной кусок в комментарии укажите "{_id}" (Без кавычек)</ChunkWarning>
+            </PathOverflow>
+          ) : null
+      }
       <Items>
         {
           image 
